@@ -1,0 +1,1 @@
+-- Main Game Script\n-- This script initializes the game and handles core gameplay mechanics\n\nlocal Players = game:GetService('Players')\nlocal RunService = game:GetService('RunService')\n\n-- Initialize game settings\nlocal function initGame()\n    print('Game Initialized')\nend\n\nRunService.Heartbeat:Connect(initGame)
