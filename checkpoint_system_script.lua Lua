@@ -1,0 +1,35 @@
+local function createCheckpoint(position, name)
+    local checkpoint = Instance.new('Part')
+    checkpoint.Name = name or 'Checkpoint'
+    checkpoint.Shape = Enum.PartType.Block
+    checkpoint.Material = Enum.Material.Neon
+    checkpoint.Size = Vector3.new(15, 1, 15)
+    checkpoint.Position = position
+    checkpoint.CanCollide = true
+    checkpoint.BrickColor = BrickColor.new('Lime green')
+    checkpoint.TopSurface = Enum.SurfaceType.Smooth
+    checkpoint.BottomSurface = Enum.SurfaceType.Smooth
+    checkpoint.Parent = workspace
+    
+    checkpoint.Touched:Connect(function(hit)
+        local humanoid = hit.Parent:FindFirstChild('Humanoid')
+        if humanoid then
+            print(hit.Parent.Name .. ' reached checkpoint: ' .. name)
+        end
+    end)
+    
+    return checkpoint
+end
+
+local checkpoints = workspace:FindFirstChild('Checkpoints') or Instance.new('Folder')
+checkpoints.Name = 'Checkpoints'
+checkpoints.Parent = workspace
+
+if #checkpoints:GetChildren() == 0 then
+    createCheckpoint(Vector3.new(0, 5, 0), 'StartCheckpoint')
+    createCheckpoint(Vector3.new(50, 5, 50), 'Checkpoint1')
+    createCheckpoint(Vector3.new(100, 5, 100), 'Checkpoint2')
+    createCheckpoint(Vector3.new(150, 5, 150), 'FinalCheckpoint')
+end
+
+print('Checkpoint System Script Loaded')
